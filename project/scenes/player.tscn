@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://uhodt6otq7x5"]
+
+[ext_resource type="Texture2D" uid="uid://bw8vdfjarodnt" path="res://project/assets/sprites/player.png" id="1_7p600"]
+[ext_resource type="Script" path="res://project/scripts/player.gd" id="1_k0r26"]
+[ext_resource type="PackedScene" uid="uid://3iayqw8oh0jn" path="res://project/scenes/bullet.tscn" id="3_olxfq"]
+
+[node name="Player" type="Node2D"]
+position = Vector2(1, -1)
+script = ExtResource("1_k0r26")
+
+[node name="Player" type="Area2D" parent="."]
+collision_mask = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="Player"]
+texture = ExtResource("1_7p600")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Player"]
+polygon = PackedVector2Array(14, 1, -14, -15, -8, 0, -15, 15)
+
+[node name="Bullet" parent="." instance=ExtResource("3_olxfq")]
+visible = false
+
+[connection signal="area_entered" from="Player" to="." method="_on_player_area_entered"]
